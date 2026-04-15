@@ -1,0 +1,113 @@
+/* Configurações básicas e reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.container {
+    background: white;
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Grupos de controle (Inputs e Filtros) */
+.input-group, .filter-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+input, select, button {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+input { flex: 1; min-width: 200px; }
+
+button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+button:hover { background-color: #0056b3; }
+
+/* Estilização da Lista */
+ul { list-style: none; }
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.task-item:hover { transform: scale(1.01); box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+
+/* Conteúdo da tarefa (Esquerda) */
+.task-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-text { font-weight: 600; color: #444; }
+
+/* Estilização Condicional de Cores */
+.prio-Alta { color: #d9534f; font-size: 0.85em; font-weight: bold; }
+.prio-Média { color: #f0ad4e; font-size: 0.85em; font-weight: bold; }
+.prio-Baixa { color: #5cb85c; font-size: 0.85em; font-weight: bold; }
+
+/* Ações (Direita) */
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.done-btn { background-color: #28a745; }
+.edit-btn { background-color: #ffc107; color: #333; }
+.delete-btn { background-color: #dc3545; }
+
+/* Status Concluído */
+.completed .task-text {
+    text-decoration: line-through;
+    color: #888;
+}
+.completed {
+    background-color: #f9f9f9;
+    opacity: 0.8;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .input-group { flex-direction: column; }
+    .task-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .task-actions { width: 100%; justify-content: flex-end; }
+}
