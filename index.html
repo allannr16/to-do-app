@@ -1,39 +1,57 @@
 # to-do-app
 desafio de criação de agenda de tarefa
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List Acadêmica</title>
+    <title>To-Do List Completa</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="light-mode"> <div class="container">
+        <header>
+            <h1>Minhas Tarefas</h1>
+            <button id="btn-tema" title="Alternar Modo Noturno/Dia">☀️</button>
+        </header>
 
-    <div class="container">
-        <h1>Minhas Tarefas</h1>
-
-        <div class="input-group">
-            <input type="text" id="taskInput" placeholder="Descrição da tarefa...">
-            <select id="priorityInput">
-                <option value="Alta">Alta</option>
-                <option value="Média">Média</option>
-                <option value="Baixa" selected>Baixa</option>
-            </select>
-            <button id="addBtn">Adicionar</button>
+        <div class="input-section">
+            <input type="text" id="input-tarefa" placeholder="Digite a descrição da tarefa...">
+            
+            <div class="input-row">
+                <select id="select-prioridade" title="Prioridade">
+                    <option value="Alta">Alta</option>
+                    <option value="Média">Média</option>
+                    <option value="Baixa" selected>Baixa</option>
+                </select>
+                
+                <input type="date" id="input-data-entrega" title="Data de entrega (Opcional)">
+                
+                <button id="btn-adicionar">Adicionar</button>
+            </div>
         </div>
 
-        <div class="filter-group">
-            <label for="sortSelect">Organizar por:</label>
-            <select id="sortSelect">
-                <option value="criacao">Ordem de Criação</option>
-                <option value="alta-baixa">Prioridade (Alta -> Baixa)</option>
-                <option value="baixa-alta">Prioridade (Baixa -> Alta)</option>
-                <option value="aleatoria">Aleatória</option>
+        <div class="sort-section">
+            <label for="select-ordem">Organizar por:</label>
+            <select id="select-ordem">
+                <option value="criacao">Ordem de Criação (Mais recentes)</option>
+                <option value="prio-baixa-alta">Prioridade: Baixa para Alta</option>
+                <option value="prio-alta-baixa">Prioridade: Alta para Baixa</option>
             </select>
         </div>
 
-        <ul id="taskList"></ul>
+        <ul id="lista-tarefas"></ul>
+    </div>
+
+    <button id="btn-abrir-lixeira" title="Abrir Lixeira">🗑️</button>
+
+    <div id="modal-lixeira" class="escondido">
+        <div class="modal-conteudo">
+            <header>
+                <h2>Tarefas Deletadas</h2>
+                <button id="btn-fechar-lixeira">✖</button>
+            </header>
+            <ul id="lista-lixeira"></ul>
+        </div>
     </div>
 
     <script src="script.js"></script>
