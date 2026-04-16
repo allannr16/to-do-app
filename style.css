@@ -1,4 +1,30 @@
-/* Configurações básicas e reset */
+/* ==========================================
+   VARIÁVEIS DE CORES (Modo Claro Padrão)
+   ========================================== */
+:root {
+    --cor-fundo-body: #f4f7f6;
+    --cor-fundo-container: #ffffff;
+    --cor-texto-principal: #333333;
+    --cor-texto-secundario: #666666;
+    --cor-fundo-tarefa: #fdfdfd;
+    --cor-borda: #cccccc;
+    --sombra: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   CORES MODO NOTURNO (Dark Mode)
+   ========================================== */
+body.dark-mode {
+    --cor-fundo-body: #121212;
+    --cor-fundo-container: #1e1e1e;
+    --cor-texto-principal: #e0e0e0;
+    --cor-texto-secundario: #aaaaaa;
+    --cor-fundo-tarefa: #2c2c2c;
+    --cor-borda: #444444;
+    --sombra: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -7,107 +33,181 @@
 }
 
 body {
-    background-color: #f0f2f5;
+    background-color: var(--cor-fundo-body);
+    color: var(--cor-texto-principal);
     display: flex;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
-    background: white;
+    background-color: var(--cor-fundo-container);
     width: 100%;
-    max-width: 700px;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 650px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+    transition: background-color 0.3s;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #333;
-}
-
-/* Grupos de controle (Inputs e Filtros) */
-.input-group, .filter-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-input, select, button {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    outline: none;
-}
-
-input { flex: 1; min-width: 200px; }
-
-button {
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    transition: 0.3s;
-}
-
-button:hover { background-color: #0056b3; }
-
-/* Estilização da Lista */
-ul { list-style: none; }
-
-.task-item {
+/* Cabeçalho e Tema */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
-    margin-bottom: 10px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    transition: 0.2s;
+    margin-bottom: 20px;
 }
 
-.task-item:hover { transform: scale(1.01); box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+#btn-tema {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+#btn-tema:hover { transform: scale(1.2); }
 
-/* Conteúdo da tarefa (Esquerda) */
-.task-content {
+/* Inputs e Filtros */
+.input-section, .sort-section {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.task-text { font-weight: 600; color: #444; }
-
-/* Estilização Condicional de Cores */
-.prio-Alta { color: #d9534f; font-size: 0.85em; font-weight: bold; }
-.prio-Média { color: #f0ad4e; font-size: 0.85em; font-weight: bold; }
-.prio-Baixa { color: #5cb85c; font-size: 0.85em; font-weight: bold; }
-
-/* Ações (Direita) */
-.task-actions {
+.input-row {
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
 }
 
-.done-btn { background-color: #28a745; }
-.edit-btn { background-color: #ffc107; color: #333; }
-.delete-btn { background-color: #dc3545; }
-
-/* Status Concluído */
-.completed .task-text {
-    text-decoration: line-through;
-    color: #888;
+input, select, button {
+    padding: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--cor-fundo-container);
+    color: var(--cor-texto-principal);
 }
-.completed {
-    background-color: #f9f9f9;
-    opacity: 0.8;
+
+input[type="text"] { width: 100%; }
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:active { transform: scale(0.95); }
+
+#btn-adicionar { background-color: #3498db; color: white; flex-grow: 1; }
+#btn-adicionar:hover { background-color: #2980b9; }
+
+/* Lista de Tarefas */
+ul { list-style: none; }
+
+.tarefa-item {
+    background-color: var(--cor-fundo-tarefa);
+    border: 1px solid var(--cor-borda);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 6px solid transparent;
+    transition: all 0.2s;
+}
+
+.tarefa-item:hover { box-shadow: var(--sombra); transform: translateY(-2px); }
+
+/* Informações da Tarefa (Esquerda) */
+.tarefa-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+}
+
+.tarefa-info h3 { font-size: 16px; margin: 0; }
+.tarefa-detalhes { font-size: 12px; color: var(--cor-texto-secundario); }
+
+/* Cores de Prioridade */
+.prioridade-Alta { border-left-color: #e74c3c; } /* Vermelho */
+.prioridade-Média { border-left-color: #f1c40f; } /* Amarelo */
+.prioridade-Baixa { border-left-color: #2ecc71; } /* Verde */
+
+/* Estilo de Tarefa Concluída */
+.concluida {
+    background-color: #d3d3d3; /* Fica cinza */
+    opacity: 0.7;
+    border-left-color: #999 !important; /* Remove a cor da prioridade */
+}
+.concluida h3 {
+    text-decoration: line-through; /* Riscado */
+    color: #555;
+}
+body.dark-mode .concluida { background-color: #444; }
+
+/* Botões de Ação (Direita) */
+.acoes-tarefa {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-concluir { background-color: #28a745; color: white; }
+.btn-editar { background-color: #f39c12; color: white; }
+.btn-deletar { background-color: #e74c3c; color: white; }
+.btn-restaurar { background-color: #3498db; color: white; }
+
+/* Lixeira Flutuante */
+#btn-abrir-lixeira {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e74c3c;
+    color: white;
+    font-size: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Faz ficar redondo */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#btn-abrir-lixeira:hover { background-color: #c0392b; }
+
+/* Modal (Janela) da Lixeira */
+#modal-lixeira {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Fica na frente de tudo */
+}
+
+/* Classe para esconder a lixeira */
+.escondido { display: none !important; }
+
+.modal-conteudo {
+    background-color: var(--cor-fundo-container);
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 80vh;
+    overflow-y: auto; /* Adiciona barra de rolagem se tiver muito item */
 }
 
 /* Responsividade */
-@media (max-width: 480px) {
-    .input-group { flex-direction: column; }
-    .task-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .task-actions { width: 100%; justify-content: flex-end; }
+@media (max-width: 500px) {
+    .tarefa-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .acoes-tarefa { width: 100%; justify-content: flex-end; }
+    .input-row { flex-direction: column; }
 }
